@@ -50,18 +50,19 @@ function clearDisplay() {
     currentNumAsString = 0;
     display.innerText = "0";
 }
-
+/* operator button functions */
 function operateOn(operator) {
     numArray.push(currentNumAsString);
     numArray.push(operator);
     clearDisplay();
     
 }
-
+/* equal buttons functions */
 function performEquation() {
     numArray.push(currentNumAsString);
     let ans = evaluate(numArray);
     displayAnswer(ans);
+    
 }
 
 function evaluate(arr) {
