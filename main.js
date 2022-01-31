@@ -45,9 +45,42 @@ function displayNum(num) {
 function appendNum(num) {
     currentNumAsString += `${num}`;
 }
-let currentNumAsString = ""
 
+function clearDisplay() {
+    currentNumAsString = 0;
+    display.innerText = "0";
+}
+
+function operateOn(operator) {
+    numArray.push(currentNumAsString);
+    numArray.push(operator);
+    clearDisplay();
+    
+}
+
+function performEquation() {
+    numArray.push(currentNumAsString);
+    let ans = evaluate(numArray);
+    displayAnswer(ans);
+}
+
+function evaluate(arr) {
+    while(arr.length >= 3) {
+        let currentAns = operate(arr[1], +arr[0], +arr[2]);
+        arr.splice(0, 3, currentAns);
+    }
+    return arr[0];
+}
+
+function displayAnswer(num) {
+    display.innerText = `${num}`;
+}
+/* set intial states */
+let currentNumAsString = "";
+let numArray = [];
 const display = document.querySelector(".display");
+
+/* number buttons */
 const zero = document.querySelector(".zero");
 const one = document.querySelector(".one");
 const two = document.querySelector(".two");
@@ -69,3 +102,18 @@ six.addEventListener('click', () => {addNum(6);});
 seven.addEventListener('click', () => {addNum(7);});
 eight.addEventListener('click', () => {addNum(8);});
 nine.addEventListener('click', () => {addNum(9);});
+
+/* operation buttons */
+const divideButton = document.querySelector(".divide");
+const multiplyButton = document.querySelector(".multiply");
+const subtractButton = document.querySelector(".subtract");
+const addButton = document.querySelector(".add"); 
+const clearButton = document.querySelector(".clear");
+const equalButton = document.querySelector(".equals");
+
+divideButton.addEventListener('click', () => {operateOn("/");});
+multiplyButton.addEventListener('click', () => {operateOn("*");});
+subtractButton.addEventListener('click', () => {operateOn("-");});
+addButton.addEventListener('click', () => {operateOn("+");});
+clearButton.addEventListener('click', () => {clearDisplay();});
+equalButton.addEventListener('click', () => {performEquation();});
