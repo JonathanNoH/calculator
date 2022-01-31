@@ -88,3 +88,12 @@ body {
     border: 0.1em solid black;
     padding: 0.5em;
 }
+
+.equals {
+    grid-column: 1 / span 3;
+}
+
+.add {
+    grid-row: 5 / span 2;
+    grid-column: 4;
+}
