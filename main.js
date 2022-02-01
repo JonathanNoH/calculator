@@ -30,16 +30,12 @@ function operate(operator, a, b) {
 }
 
 function addNum(num) {
-    displayNum(num);
     appendNum(num);
+    displayNum(currentNumAsString);
 }
 
 function displayNum(num) {
-    if (display.innerText == "0") {
-        display.innerText = `${num}`;
-        return;
-    }
-    display.innerText += `${num}`;
+    display.innerText = `${num}`;
 }
 
 function appendNum(num) {
@@ -47,35 +43,38 @@ function appendNum(num) {
 }
 
 function clearDisplay() {
-    currentNumAsString = 0;
+    currentNumAsString = "";
     display.innerText = "0";
+    numArray = [];
 }
 /* operator button functions */
 function operateOn(operator) {
-    numArray.push(currentNumAsString);
-    numArray.push(operator);
-    clearDisplay();
-    
+    numArray.push(+currentNumAsString);
+    if (numArray.length >= 3) {
+        let newAnswer = evaluate(numArray);
+        displayNum(newAnswer);
+        numArray.push(operator);
+        currentNumAsString = "";
+        
+    } else {
+        numArray.push(operator);
+        currentNumAsString = "";
+        display.innerText = "0";
+    }
 }
 /* equal buttons functions */
 function performEquation() {
     numArray.push(currentNumAsString);
-    let ans = evaluate(numArray);
-    displayAnswer(ans);
-    
+    let ans = evaluate();
+    displayNum(ans);
 }
 
-function evaluate(arr) {
-    while(arr.length >= 3) {
-        let currentAns = operate(arr[1], +arr[0], +arr[2]);
-        arr.splice(0, 3, currentAns);
-    }
-    return arr[0];
+function evaluate() {
+    let currentAns = operate(numArray[1], +numArray[0], +numArray[2]);
+    numArray.splice(0, 3, currentAns);
+    return numArray[0];
 }
 
-function displayAnswer(num) {
-    display.innerText = `${num}`;
-}
 /* set intial states */
 let currentNumAsString = "";
 let numArray = [];
