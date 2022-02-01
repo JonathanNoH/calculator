@@ -100,7 +100,16 @@ function evaluate() {
 /* rounding function */
 Number.prototype.round = function(places) {
     return +(Math.round(this + "e+" + places)  + "e-" + places);
-  }
+}
+
+/* decimal function */
+
+function addDecimal() {
+    if (currentNumAsString.includes(".")){
+        return;
+    }
+    addNum(".");
+}
 
 /* set intial states */
 let currentNumAsString = "";
@@ -129,6 +138,11 @@ six.addEventListener('click', () => {addNum(6);});
 seven.addEventListener('click', () => {addNum(7);});
 eight.addEventListener('click', () => {addNum(8);});
 nine.addEventListener('click', () => {addNum(9);});
+
+/* decimal button */
+
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener('click', () => {addDecimal();});
 
 /* operation buttons */
 const divideButton = document.querySelector(".divide");
