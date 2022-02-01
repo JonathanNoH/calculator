@@ -12,7 +12,10 @@ function subtract(a, b) {
 
 function divide(a, b) {
     if(b == 0) {
-        return "Don't Do That.";
+        setTimeout(function() {
+            clearDisplay();
+        }, 2000);
+        return "Don't do that.";
     }
     return a / b;
 }
@@ -90,9 +93,14 @@ function performEquation() {
 
 function evaluate() {
     let currentAns = operate(numArray[1], +numArray[0], +numArray[2]);
+    currentAns.round(15);
     numArray.splice(0, 3, currentAns);
     return numArray[0];
 }
+/* rounding function */
+Number.prototype.round = function(places) {
+    return +(Math.round(this + "e+" + places)  + "e-" + places);
+  }
 
 /* set intial states */
 let currentNumAsString = "";
