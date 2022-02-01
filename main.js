@@ -11,6 +11,9 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
+    if(b == 0) {
+        return "Don't Do That.";
+    }
     return a / b;
 }
 
@@ -71,7 +74,14 @@ function operateOn(operator) {
 }
 /* equal buttons functions */
 function performEquation() {
-    numArray.push(+currentNumAsString);
+    /* guard after using equals button*/
+    if(currentNumAsString != "") {
+        numArray.push(+currentNumAsString);
+    }
+    /* guard against pressing equals button multiple times*/
+    if(numArray.length < 3) {
+        return;
+    }
     let ans = evaluate();
     numArray = [ans];
     currentNumAsString = "";
