@@ -49,8 +49,13 @@ function clearDisplay() {
 }
 /* operator button functions */
 function operateOn(operator) {
+    /* guard after using equals button*/
     if(currentNumAsString != "") {
         numArray.push(+currentNumAsString);
+    }
+    /*guard for pressing operator button multiple times*/
+    if(isNaN(numArray[numArray.length - 1])) {
+        return;
     }
     if (numArray.length >= 3) {
         let newAnswer = evaluate();
