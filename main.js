@@ -93,7 +93,7 @@ function performEquation() {
 
 function evaluate() {
     let currentAns = operate(numArray[1], +numArray[0], +numArray[2]);
-    currentAns.round(15);
+    currentAns.round(10);
     numArray.splice(0, 3, currentAns);
     return numArray[0];
 }
