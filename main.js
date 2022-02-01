@@ -49,9 +49,11 @@ function clearDisplay() {
 }
 /* operator button functions */
 function operateOn(operator) {
-    numArray.push(+currentNumAsString);
+    if(currentNumAsString != "") {
+        numArray.push(+currentNumAsString);
+    }
     if (numArray.length >= 3) {
-        let newAnswer = evaluate(numArray);
+        let newAnswer = evaluate();
         displayNum(newAnswer);
         numArray.push(operator);
         currentNumAsString = "";
@@ -64,8 +66,10 @@ function operateOn(operator) {
 }
 /* equal buttons functions */
 function performEquation() {
-    numArray.push(currentNumAsString);
+    numArray.push(+currentNumAsString);
     let ans = evaluate();
+    numArray = [ans];
+    currentNumAsString = "";
     displayNum(ans);
 }
 
